@@ -5,4 +5,6 @@
 *.sh
 a.out
 philo/build/
+philo/libft/
 philo/philo
+philo/compile_commands.json

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 16:48:16 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 12:25:31 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/07/01 12:23:45 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/01 12:24:13 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <pthread.h>
-# include <unistd.h>
-# include <stddef.h>
+# include "main.h"
 
-# include "error.h"
-# include "utils.h"
+int	ft_strisdigit(char *s);
 
 #endif

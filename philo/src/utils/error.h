@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 16:48:16 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 12:25:31 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/07/01 12:01:37 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/01 12:30:31 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef ERROR_H
+# define ERROR_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <pthread.h>
-# include <unistd.h>
-# include <stddef.h>
+# include "main.h"
 
-# include "error.h"
-# include "utils.h"
+int	has_invalid_args(int argc, char *argv[]);
+int	has_non_numeric_arg(int argc, char *argv[]);
 
 #endif
