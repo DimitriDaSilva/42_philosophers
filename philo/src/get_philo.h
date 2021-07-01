@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   get_philo.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 12:23:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 16:39:22 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/07/01 17:41:18 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/01 18:14:58 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef GET_PHILO_H
+# define GET_PHILO_H
 
 # include "main.h"
 
-long long	ft_atoi(const char *str);
-void	    *ft_calloc(size_t nmemb, size_t size);
-int	        ft_strisdigit(char *s);
+t_philo     *get_philo(int argc, char *argv[]);
+t_settings  *get_settings(int argc, char *argv[]);
 
 #endif
+

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
+/*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 12:23:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 16:39:22 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/01/13 18:25:20 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/01 16:31:50 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
 
-# include "main.h"
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*mem;
 
-long long	ft_atoi(const char *str);
-void	    *ft_calloc(size_t nmemb, size_t size);
-int	        ft_strisdigit(char *s);
-
-#endif
+	mem = malloc(nmemb * size);
+	if (!mem)
+		return (0);
+	memset(mem, 0, nmemb * size);
+	return (mem);
+}
