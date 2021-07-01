@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 18:14:43 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/01 20:16:52 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_philo *get_philo(int argc, char *argv[])
 	philo->threads = ft_calloc(philo->settings->nb_philo, sizeof(pthread_t));
 	if (!philo->threads)
 		return (NULL);
-	philo->forks = ft_calloc(philo->settings->nb_philo, sizeof(int));
+	philo->forks = ft_calloc(philo->settings->nb_philo, sizeof(pthread_mutex_t));
 	if (!philo->forks)
 		return (NULL);
 	return (philo);
@@ -37,9 +37,9 @@ t_settings *get_settings(int argc, char *argv[])
 	if (!settings)
 		return (NULL);
 	settings->nb_philo = ft_atoi(argv[1]);
-	settings->time_to_die = ft_atoi(argv[2]);
-	settings->time_to_eat = ft_atoi(argv[3]);
-	settings->time_to_sleep = ft_atoi(argv[4]);
+	settings->time_to_die = ft_atoi(argv[2]) * 1000;
+	settings->time_to_eat = ft_atoi(argv[3]) * 1000;
+	settings->time_to_sleep = ft_atoi(argv[4]) * 1000;
 	if (argc == 6)
 		settings->nb_times_to_eat = ft_atoi(argv[5]);
 	else

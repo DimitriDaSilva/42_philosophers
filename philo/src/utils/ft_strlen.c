@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 16:48:16 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 20:31:28 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/01/12 09:44:29 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/01 19:34:26 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include "utils.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <pthread.h>
-# include <unistd.h>
-# include <stddef.h>
-# include <limits.h>
-# include <unistd.h>
+size_t	ft_strlen(const char *s)
+{
+	size_t	count;
 
-# include "structs.h"
-# include "get_philo.h"
-# include "init_philo.h"
-# include "init_life.h"
-# include "error.h"
-# include "utils.h"
-
-#endif
+	count = 0;
+	if (!s)
+		return (0);
+	while (s[count] != '\0')
+		count++;
+	return (count);
+}
