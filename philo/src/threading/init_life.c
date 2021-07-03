@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:58:13 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 20:41:55 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/03 08:26:54 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void	*init_life(void *arg)
 
 	philo = (t_philo *)arg;
 	index = philo->index++;
-	set_eat(philo, index);
-	set_sleep(philo, index);
-	set_think(philo, index);
+	printf("Philosophers %d is about to sleep %.1f sec\n",
+			index, (float)(philo->settings->time_to_sleep / 1000000));
+	usleep(philo->settings->time_to_sleep);
+	printf("Philosophers %d is done sleeping\n", index);
+	/*set_eat(philo, index);*/
+	/*set_sleep(philo, index);*/
+	/*set_think(philo, index);*/
 	return (NULL);
 }
 
