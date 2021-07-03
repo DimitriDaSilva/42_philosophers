@@ -6,7 +6,7 @@
 #    By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/11 09:33:15 by dda-silv          #+#    #+#              #
-#    Updated: 2021/04/19 13:59:28 by dda-silv         ###   ########.fr        #
+#    Updated: 2021/07/03 16:50:41 by dda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ FLAGS_COMP			:= 		$(FLAG_WARNING) $(FLAG_INC) $(FLAG_MAKEFILE) $(FLAG_DEBUG) $(F
 
 # Flags - memory leak check
 FLAG_MEM_LEAK		:= 		-fsanitize=address
+FLAG_RACE_CONDITION	:= 		-fsanitize=thread
 
 # Others commands
 RM					:=		rm -rf
@@ -77,6 +78,7 @@ re:							fclean all
 # Debugging functions
 
 debug:						FLAGS_COMP += $(FLAG_MEM_LEAK)
+#debug:						FLAGS_COMP += $(FLAG_RACE_CONDITION)
 debug:						re
 
 # Format functions
