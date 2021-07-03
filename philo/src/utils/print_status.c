@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 09:38:27 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 13:43:53 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/03 16:58:26 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	print_status_fork(t_philo *philo, int nb_index, char *status, int fork_index
 	ft_putstr(str);
 	free(timestamp);
 	free(index);
+	free(fork);
 	return (EXIT_SUCCESS);
 }
 

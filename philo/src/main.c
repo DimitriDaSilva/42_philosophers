@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 16:47:34 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 19:41:42 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/03 16:56:53 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,14 @@ int	main(int argc, char *argv[])
 
 	// join all thread
 	printf("Finished\n");
+	free_memory(philo);
 	return (EXIT_SUCCESS);
+}
+
+void	free_memory(t_philo *philo)
+{
+	free(philo->threads);
+	free(philo->forks);
+	free(philo->settings);
+	free(philo);
 }

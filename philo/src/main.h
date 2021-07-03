@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 16:48:16 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 09:53:34 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/03 16:57:08 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@
 # include "init_life.h"
 # include "error.h"
 # include "utils.h"
+
+void	free_memory(t_philo *philo);
 
 #endif
