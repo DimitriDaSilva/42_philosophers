@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 12:23:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 11:45:05 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:52:59 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ size_t	    ft_strlcpy(char *dst, const char *src, size_t size);
 size_t      ft_strlen(const char *s);
 size_t	    get_len_int(long long nb);
 int	        print_status(t_philo *philo, int index, char *status);
-int	    print_status_fork(t_philo *philo, int nb_index, char *status, int fork_index);
+int	        print_status_fork(t_philo *philo, int nb_index, char *status, int fork_index);
 char        *get_timestamp(struct timeval curr_time, struct timeval program_start);
+long	    get_time_diff(struct timeval present, struct timeval past);
 
 #endif
