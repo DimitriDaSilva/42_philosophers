@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_life.h                                        :+:      :+:    :+:   */
+/*   get_len_int.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
+/*   By: dds <dda-silv@student.42lisboa.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 19:59:19 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 10:41:51 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/01/22 13:24:13 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/03 10:02:20 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_LIFE_H
-# define INIT_LIFE_H
+#include "utils.h"
 
-# include "main.h"
-
-void    *init_life(void *arg);
-int     set_eat(t_philo *philo, int index);
-int     set_sleep(t_philo *philo, int index);
-int     set_think(t_philo *philo, int index);
-
-#endif
+size_t	get_len_int(long long nb)
+{
+	if (0 <= nb && nb < 10)
+		return (1);
+	else if (-10 < nb && nb < 0)
+		return (2);
+	return (1 + get_len_int(nb / 10));
+}

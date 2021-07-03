@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:58:13 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 08:26:54 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/03 10:44:51 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,35 @@ void	*init_life(void *arg)
 
 	philo = (t_philo *)arg;
 	index = philo->index++;
-	printf("Philosophers %d is about to sleep %.1f sec\n",
-			index, (float)(philo->settings->time_to_sleep / 1000000));
-	usleep(philo->settings->time_to_sleep);
-	printf("Philosophers %d is done sleeping\n", index);
-	/*set_eat(philo, index);*/
-	/*set_sleep(philo, index);*/
-	/*set_think(philo, index);*/
+	set_eat(philo, index);
+	set_sleep(philo, index);
+	set_think(philo, index);
 	return (NULL);
 }
 
-void set_eat(t_philo *philo, int index)
+int set_eat(t_philo *philo, int index)
 {
+	if (print_status(philo, index + 1, "is eating") != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
 	usleep(philo->settings->time_to_eat);
-	(void)philo;
-	(void)index;
+	return (EXIT_SUCCESS);
 }
 
-void set_sleep(t_philo *philo, int index)
+int set_sleep(t_philo *philo, int index)
 {
+	if (print_status(philo, index + 1, "is sleeping") != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
 	usleep(philo->settings->time_to_sleep);
+	return (EXIT_SUCCESS);
 	(void)philo;
 	(void)index;
 }
 
-void set_think(t_philo *philo, int index)
+int set_think(t_philo *philo, int index)
 {
+	if (print_status(philo, index + 1, "is thinking") != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
 	(void)philo;
 	(void)index;
+	return (EXIT_SUCCESS);
 }

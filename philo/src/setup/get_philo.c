@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 20:16:52 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/03 10:43:54 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_philo *get_philo(int argc, char *argv[])
 
 	philo = ft_calloc(1, sizeof(t_philo));
 	if (!philo)
+		return (NULL);
+	if (gettimeofday(&philo->program_start, NULL) != EXIT_SUCCESS)
 		return (NULL);
 	philo->settings = get_settings(argc, argv);
 	philo->threads = ft_calloc(philo->settings->nb_philo, sizeof(pthread_t));

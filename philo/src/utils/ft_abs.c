@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_life.h                                        :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
+/*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 19:59:19 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 10:41:51 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/02/17 15:54:24 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/04/08 11:23:23 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_LIFE_H
-# define INIT_LIFE_H
+long long	ft_abs(long long n)
+{
+	long long	ret;
 
-# include "main.h"
-
-void    *init_life(void *arg);
-int     set_eat(t_philo *philo, int index);
-int     set_sleep(t_philo *philo, int index);
-int     set_think(t_philo *philo, int index);
-
-#endif
+	if (n < 0)
+		ret = (-1) * n;
+	else
+		ret = n;
+	return (ret);
+}
