@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 16:56:44 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 11:29:48 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_settings *get_settings(int argc, char *argv[])
 	if (!settings)
 		return (NULL);
 	settings->nb_philo = ft_atoi(argv[1]);
-	settings->time_to_die = ft_atoi(argv[2]) * 1000;
-	settings->time_to_eat = ft_atoi(argv[3]) * 1000;
-	settings->time_to_sleep = ft_atoi(argv[4]) * 1000;
+	settings->time_to_die = ft_atoi(argv[2]);
+	settings->time_to_eat = ft_atoi(argv[3]);
+	settings->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		settings->nb_times_to_eat = ft_atoi(argv[5]);
 	else

@@ -6,23 +6,19 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 17:52:08 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 17:52:19 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 11:10:16 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-char *get_timestamp(struct timeval curr_time, struct timeval program_start)
+char *get_timestamp(struct timeval *curr_time, struct timeval *program_start)
 {
 	char	*timestamp_str;
-	long	timestamp_microseconds;
-	long	timestamp_milliseconds;
+	long	timestamp_int;
 
-	timestamp_microseconds = (long)((
-				(curr_time.tv_sec - program_start.tv_sec) * 1000000
-				+ (long)curr_time.tv_usec - (long)program_start.tv_usec));
-	timestamp_milliseconds = timestamp_microseconds / 1000;
-	timestamp_str = ft_itoa(timestamp_milliseconds);
+	timestamp_int = get_time_diff(curr_time, program_start);
+	timestamp_str = ft_itoa(timestamp_int);
 	if (!timestamp_str)
 		return (NULL);
 	return (timestamp_str);
