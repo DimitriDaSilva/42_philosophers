@@ -6,11 +6,11 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 09:44:44 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 10:14:02 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 11:47:53 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft_light.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {

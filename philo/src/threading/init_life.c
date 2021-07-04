@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:58:13 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 11:30:37 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 11:54:59 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*init_life(void *arg)
 	index = philo->index++;
 	pthread_mutex_unlock(&philo->write_lock);
 	memset(&time_last_meal, 0, sizeof(struct timeval));
-	while (philo->is_one_philo_dead == 0)
+	while (1)
 	{
 		if (start_taking_forks(philo, index, &time_last_meal) != EXIT_SUCCESS)
 		   return (NULL);
@@ -54,7 +54,7 @@ int start_taking_forks(t_philo *philo, int index, struct timeval *lastmeal)
 		   usleep(time_before_death * 1000);
 		   if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
 			   return (EXIT_FAILURE);
-		   philo->is_one_philo_dead = 1;
+		   pthread_mutex_lock(&philo->is_one_philo_dead);
 	   }
 	}
 	if (index % 2 != 0)
@@ -89,7 +89,7 @@ int take_fork(t_philo *philo, int philo_index, int fork_index)
 {
 	if (pthread_mutex_lock(&philo->forks[fork_index]) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (print_status_fork(philo, philo_index + 1, "has taken a fork", fork_index) != EXIT_SUCCESS)
+	if (print_status(philo, philo_index + 1, "has taken a fork") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -113,7 +113,7 @@ int start_sleeping(t_philo *philo, int index, struct timeval *lastmeal)
 		usleep(time_before_death * 1000);
 		if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
-		philo->is_one_philo_dead = 1;
+		pthread_mutex_lock(&philo->is_one_philo_dead);
 	}
 	else
 		usleep(philo->settings->time_to_sleep * 1000);
@@ -138,7 +138,6 @@ int	is_philo_dead(t_philo *philo, int index, struct timeval *time_last_meal)
 	{
 		if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
-		philo->is_one_philo_dead = 1;
 	}
 	return (EXIT_SUCCESS);
 }

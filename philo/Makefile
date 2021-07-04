@@ -6,7 +6,7 @@
 #    By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/11 09:33:15 by dda-silv          #+#    #+#              #
-#    Updated: 2021/07/04 11:31:44 by dda-silv         ###   ########.fr        #
+#    Updated: 2021/07/04 11:35:45 by dda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ re:							fclean all
 # Debugging functions
 
 #debug:						FLAGS_COMP += $(FLAG_MEM_LEAK)
-#debug:						FLAGS_COMP += $(FLAG_RACE_CONDITION)
+debug:						FLAGS_COMP += $(FLAG_RACE_CONDITION)
 debug:						re
 
 # Format functions

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   get_len_int.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: dds <dda-silv@student.42lisboa.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 18:25:20 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 16:31:50 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/01/22 13:24:13 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/04 11:48:11 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft_light.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+size_t	get_len_int(long long nb)
 {
-	void	*mem;
-
-	mem = malloc(nmemb * size);
-	if (!mem)
-		return (0);
-	memset(mem, 0, nmemb * size);
-	return (mem);
+	if (0 <= nb && nb < 10)
+		return (1);
+	else if (-10 < nb && nb < 0)
+		return (2);
+	return (1 + get_len_int(nb / 10));
 }

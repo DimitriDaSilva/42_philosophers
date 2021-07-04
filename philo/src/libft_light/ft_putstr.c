@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_len_int.c                                      :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dds <dda-silv@student.42lisboa.com>        +#+  +:+       +#+        */
+/*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/22 13:24:13 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 10:02:20 by dda-silv         ###   ########.fr       */
+/*   Created: 2020/10/26 09:17:16 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/04 11:47:41 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft_light.h"
 
-size_t	get_len_int(long long nb)
+int	ft_putstr(char *str)
 {
-	if (0 <= nb && nb < 10)
-		return (1);
-	else if (-10 < nb && nb < 0)
-		return (2);
-	return (1 + get_len_int(nb / 10));
+	return (write(1, str, ft_strlen(str)));
 }

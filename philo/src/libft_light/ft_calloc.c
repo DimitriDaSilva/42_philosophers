@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 09:44:29 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 19:34:26 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/01/13 18:25:20 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/04 11:47:21 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft_light.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	count;
+	void	*mem;
 
-	count = 0;
-	if (!s)
+	mem = malloc(nmemb * size);
+	if (!mem)
 		return (0);
-	while (s[count] != '\0')
-		count++;
-	return (count);
+	memset(mem, 0, nmemb * size);
+	return (mem);
 }

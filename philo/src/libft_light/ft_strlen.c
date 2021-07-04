@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/22 16:22:02 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 19:33:22 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/01/12 09:44:29 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/04 11:48:05 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft_light.h"
 
-int	ft_putchar(char c)
+size_t	ft_strlen(const char *s)
 {
-	return (write(1, &c, 1));
+	size_t	count;
+
+	count = 0;
+	if (!s)
+		return (0);
+	while (s[count] != '\0')
+		count++;
+	return (count);
 }

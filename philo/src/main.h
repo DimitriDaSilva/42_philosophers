@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 16:48:16 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/03 16:57:08 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 11:51:33 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 
+# include "libft_light.h"
 # include "structs.h"
 # include "get_philo.h"
 # include "init_philo.h"

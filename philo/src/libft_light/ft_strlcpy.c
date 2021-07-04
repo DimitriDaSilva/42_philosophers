@@ -1,18 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/26 09:17:16 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 19:33:35 by dda-silv         ###   ########.fr       */
+/*   Created: 2020/10/27 17:43:54 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/04 11:47:59 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft_light.h"
 
-int	ft_putstr(char *str)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	return (write(1, str, ft_strlen(str)));
+	char		*sav_d;
+	const char	*sav_s;
+	size_t		n;
+
+	sav_d = dst;
+	sav_s = src;
+	n = size;
+	if (n != 0)
+	{
+		while (--n != 0)
+		{
+			*sav_d = *sav_s++;
+			if (*sav_d++ == '\0')
+				break ;
+		}
+	}
+	if (n == 0)
+	{
+		if (size != 0)
+			*sav_d = '\0';
+		while (*sav_s++)
+			;
+	}
+	return (sav_s - src - 1);
 }

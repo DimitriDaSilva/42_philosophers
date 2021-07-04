@@ -6,11 +6,11 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:44:56 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 16:36:41 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 11:47:12 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft_light.h"
 
 static int	is_max(long long nb, char next_digit, int sign)
 {
