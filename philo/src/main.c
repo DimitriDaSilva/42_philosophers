@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 16:47:34 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 14:53:06 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 16:36:40 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,15 @@ int	main(int argc, char *argv[])
 	if (init_philo(philo) != EXIT_SUCCESS)
 		return (3);
 
-	// join all thread
-	printf("Finished\n");
+	printf("Finished main\n");
+	int	i;
+
+	i = -1;
+	while (++i < philo->settings->nb_philo)
+	{
+		if (pthread_detach(philo->threads[i]))
+			return (EXIT_FAILURE);
+	}
 	free_memory(philo);
 	return (EXIT_SUCCESS);
 }

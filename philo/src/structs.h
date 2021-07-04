@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 16:13:54 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 11:39:13 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 16:24:35 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_philo
     pthread_t       *threads;
     pthread_mutex_t *forks;
     pthread_mutex_t write_lock;
-    pthread_mutex_t is_one_philo_dead;
+    int             is_one_philo_dead;
     int             index;
     struct timeval  program_start;
 }                   t_philo;

@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:41:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 11:39:35 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 16:20:34 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	init_philo(t_philo *philo)
 {
-	if (pthread_mutex_init(&philo->is_one_philo_dead, NULL) != EXIT_SUCCESS)
-		return (EXIT_FAILURE);
 	if (pthread_mutex_init(&philo->write_lock, NULL) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	if (init_philo_mutex_init(philo) != EXIT_SUCCESS)
@@ -27,8 +25,6 @@ int	init_philo(t_philo *philo)
 	if (init_philo_mutex_destroy(philo) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	if (pthread_mutex_destroy(&philo->write_lock) != EXIT_SUCCESS)
-		return (EXIT_FAILURE);
-	if (pthread_mutex_destroy(&philo->is_one_philo_dead) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
