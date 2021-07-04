@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:58:13 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 11:54:59 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:58:10 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,17 @@ void	*init_life(void *arg)
 	while (1)
 	{
 		if (start_taking_forks(philo, index, &time_last_meal) != EXIT_SUCCESS)
-		   return (NULL);
+			break ;
 		gettimeofday(&time_last_meal, NULL);
 		if (start_eating(philo, index) != EXIT_SUCCESS)
-		   return (NULL);
+			break ;
 		if (start_sleeping(philo, index, &time_last_meal) != EXIT_SUCCESS)
-		   return (NULL);
+			break ;
 		/*if (is_philo_dead(philo, index, time_last_meal))*/
 			/*break ;*/
 		if (start_thinking(philo, index) != EXIT_SUCCESS)
-		   return (NULL);
+			break ;
 	}
-	pthread_detach(philo->threads[index]);
 	return (NULL);
 }
 
@@ -55,6 +54,8 @@ int start_taking_forks(t_philo *philo, int index, struct timeval *lastmeal)
 		   if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
 			   return (EXIT_FAILURE);
 		   pthread_mutex_lock(&philo->is_one_philo_dead);
+			printf("Finished\n");
+		   return (EXIT_FAILURE);
 	   }
 	}
 	if (index % 2 != 0)
