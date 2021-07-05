@@ -24,6 +24,7 @@ void		*ft_calloc(size_t nmemb, size_t size);
 char		*ft_itoa(long long n);
 int			ft_putchar(char c);
 int			ft_putstr(char *str);
+void		ft_putstr_fd(char *s, int fd);
 int			ft_strisdigit(char *s);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);

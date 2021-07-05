@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 16:26:21 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:19:28 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	start_taking_forks(t_philo *philo, t_single_philo *single_philo)
 			return (EXIT_FAILURE);
 		if (take_fork(philo, index, second_fork_index) != EXIT_SUCCESS)
 		{
-			release_fork(philo, second_fork_index);
+			release_fork(philo, index);
 			return (EXIT_FAILURE);
 		}
 	}
@@ -76,7 +76,7 @@ int	start_taking_forks(t_philo *philo, t_single_philo *single_philo)
 			return (EXIT_FAILURE);
 		if (take_fork(philo, index, index) != EXIT_SUCCESS)
 		{
-			release_fork(philo, index);
+			release_fork(philo, second_fork_index);
 			return (EXIT_FAILURE);
 		}
 	}
