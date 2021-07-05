@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 19:58:13 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 11:02:17 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/05 12:28:20 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	*init_life(void *arg)
 {
-	t_philo 		*philo;
+	t_philo			*philo;
 	int				index;
 	struct timeval	time_last_meal;
 
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->write_lock);
-	index = philo->index++;
+	index = philo->count++;
 	pthread_mutex_unlock(&philo->write_lock);
 	memset(&time_last_meal, 0, sizeof(struct timeval));
 	while (1)
@@ -37,23 +37,23 @@ void	*init_life(void *arg)
 	return (NULL);
 }
 
-int start_taking_forks(t_philo *philo, int index, struct timeval *lastmeal)
+int	start_taking_forks(t_philo *philo, int index, struct timeval *lastmeal)
 {
 	int	time_before_death;
 
 	if (lastmeal->tv_usec != 0)
 	{
 		time_before_death = get_time_before_death(philo, lastmeal);
-	   if (philo->settings->time_to_eat * 2 > time_before_death + philo->settings->time_to_die)
-	   {
-		   usleep(time_before_death * 1000);
-		   if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
-			   return (EXIT_FAILURE);
-		   pthread_mutex_lock(&philo->write_lock);
-		   philo->is_one_philo_dead = 1;
-		   pthread_mutex_unlock(&philo->write_lock);
-		   return (EXIT_FAILURE);
-	   }
+		if (philo->settings->time_to_eat * 2 > time_before_death + philo->settings->time_to_die)
+		{
+			usleep(time_before_death * 1000);
+			if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
+				return (EXIT_FAILURE);
+			pthread_mutex_lock(&philo->write_lock);
+			philo->has_a_philo_died = 1;
+			pthread_mutex_unlock(&philo->write_lock);
+			return (EXIT_FAILURE);
+		}
 	}
 	if (index % 2 != 0)
 	{
@@ -72,8 +72,7 @@ int start_taking_forks(t_philo *philo, int index, struct timeval *lastmeal)
 	return (EXIT_SUCCESS);
 }
 
-
-int start_eating(t_philo *philo, int index, struct timeval *lastmeal)
+int	start_eating(t_philo *philo, int index, struct timeval *lastmeal)
 {
 	gettimeofday(lastmeal, NULL);
 	if (print_status(philo, index + 1, "is eating") != EXIT_SUCCESS)
@@ -81,12 +80,10 @@ int start_eating(t_philo *philo, int index, struct timeval *lastmeal)
 	usleep(philo->settings->time_to_eat * 1000);
 	release_fork(philo, index);
 	release_fork(philo, (index + 1) % philo->settings->nb_philo);
-	/*if (index + 1 == 2)*/
-		/*printf("Philo 2 finished eating\n");*/
 	return (EXIT_SUCCESS);
 }
 
-int take_fork(t_philo *philo, int philo_index, int fork_index)
+int	take_fork(t_philo *philo, int philo_index, int fork_index)
 {
 	if (pthread_mutex_lock(&philo->forks[fork_index]) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
@@ -95,14 +92,14 @@ int take_fork(t_philo *philo, int philo_index, int fork_index)
 	return (EXIT_SUCCESS);
 }
 
-int release_fork(t_philo *philo, int fork_index)
+int	release_fork(t_philo *philo, int fork_index)
 {
 	if (pthread_mutex_unlock(&philo->forks[fork_index]) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
-int start_sleeping(t_philo *philo, int index, struct timeval *lastmeal)
+int	start_sleeping(t_philo *philo, int index, struct timeval *lastmeal)
 {
 	int	time_before_death;
 
@@ -115,7 +112,7 @@ int start_sleeping(t_philo *philo, int index, struct timeval *lastmeal)
 		if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
 		pthread_mutex_lock(&philo->write_lock);
-		philo->is_one_philo_dead = 1;
+		philo->has_a_philo_died = 1;
 		pthread_mutex_unlock(&philo->write_lock);
 	}
 	else
@@ -123,7 +120,7 @@ int start_sleeping(t_philo *philo, int index, struct timeval *lastmeal)
 	return (EXIT_SUCCESS);
 }
 
-int start_thinking(t_philo *philo, int index)
+int	start_thinking(t_philo *philo, int index)
 {
 	if (print_status(philo, index + 1, "is thinking") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);

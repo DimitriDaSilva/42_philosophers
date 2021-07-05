@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 12:00:58 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/01 12:32:59 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:24:48 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	has_invalid_args(int argc, char *argv[])
 int	has_non_numeric_arg(int argc, char *argv[])
 {
 	int	i;
-	int check;
+	int	check;
 
 	i = 1;
 	check = 0;

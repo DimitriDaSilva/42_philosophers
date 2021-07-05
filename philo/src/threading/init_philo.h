@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 19:44:34 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 10:09:51 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/07/05 12:21:07 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/05 12:21:08 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "main.h"
 
-int init_philo(t_philo *philo);
+int	init_philo(t_philo *philo);
 int	init_philo_mutex_init(t_philo *philo);
 int	init_philo_create(t_philo *philo);
 int	init_philo_join(t_philo *philo);

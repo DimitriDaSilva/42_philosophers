@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 09:38:27 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 10:35:33 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:23:36 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	print_status(t_philo *philo, int nb_index, char *status)
 	char			*index;
 
 	pthread_mutex_lock(&philo->write_lock);
-	if (philo->is_one_philo_dead == 1)
+	if (philo->has_a_philo_died == 1)
 	{
 		pthread_mutex_unlock(&philo->write_lock);
 		return (EXIT_FAILURE);

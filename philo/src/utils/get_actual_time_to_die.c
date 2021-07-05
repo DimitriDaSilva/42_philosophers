@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 10:26:11 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 11:29:19 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:29:12 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ long	get_time_before_death(t_philo *philo, struct timeval *lastmeal)
 	return (time_before_death);
 }
 
-long get_time_since_last_meal(struct timeval *lastmeal)
+long	get_time_since_last_meal(struct timeval *lastmeal)
 {
 	struct timeval	curr_time;
 	long			time_since_last_meal;

@@ -6,13 +6,13 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 11:29:48 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:24:34 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_philo.h"
 
-t_philo *get_philo(int argc, char *argv[])
+t_philo	*get_philo(int argc, char *argv[])
 {
 	t_philo	*philo;
 
@@ -25,15 +25,16 @@ t_philo *get_philo(int argc, char *argv[])
 	philo->threads = ft_calloc(philo->settings->nb_philo, sizeof(pthread_t));
 	if (!philo->threads)
 		return (NULL);
-	philo->forks = ft_calloc(philo->settings->nb_philo, sizeof(pthread_mutex_t));
+	philo->forks = ft_calloc(philo->settings->nb_philo,
+			sizeof(pthread_mutex_t));
 	if (!philo->forks)
 		return (NULL);
 	return (philo);
 }
 
-t_settings *get_settings(int argc, char *argv[])
+t_settings	*get_settings(int argc, char *argv[])
 {
-	t_settings *settings;
+	t_settings	*settings;
 
 	settings = ft_calloc(1, sizeof(t_settings));
 	if (!settings)

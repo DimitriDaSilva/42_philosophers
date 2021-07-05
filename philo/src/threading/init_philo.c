@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:41:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 11:02:29 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:25:37 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	init_philo_create(t_philo *philo)
 	while (++i < philo->settings->nb_philo)
 	{
 		if (pthread_create(&philo->threads[i], NULL,
-					&init_life, philo) != EXIT_SUCCESS)
+				&init_life, philo) != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

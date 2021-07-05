@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 16:47:34 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 10:36:24 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 12:25:07 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char *argv[])
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	if (has_invalid_args(argc, argv))
 	{
@@ -26,7 +26,6 @@ int	main(int argc, char *argv[])
 		return (2);
 	if (init_philo(philo) != EXIT_SUCCESS)
 		return (3);
-
 	free_memory(philo);
 	return (EXIT_SUCCESS);
 }
