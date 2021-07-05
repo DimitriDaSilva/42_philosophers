@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 09:38:27 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 16:35:50 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 10:35:33 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	print_status(t_philo *philo, int nb_index, char *status)
 
 	pthread_mutex_lock(&philo->write_lock);
 	if (philo->is_one_philo_dead == 1)
+	{
+		pthread_mutex_unlock(&philo->write_lock);
 		return (EXIT_FAILURE);
+	}
 	if (gettimeofday(&curr_time, NULL) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	timestamp = get_timestamp(&curr_time, &philo->program_start);

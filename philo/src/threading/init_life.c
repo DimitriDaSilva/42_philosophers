@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:58:13 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 16:40:40 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 10:35:54 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	*init_life(void *arg)
 			break ;
 		if (start_thinking(philo, index) != EXIT_SUCCESS)
 			break ;
-		pthread_mutex_lock(&philo->write_lock);
-		if (philo->is_one_philo_dead == 0)
-			pthread_detach(philo->threads[index]);
-		pthread_mutex_unlock(&philo->write_lock);
+		/*pthread_mutex_lock(&philo->write_lock);*/
+		/*if (philo->is_one_philo_dead == 1)*/
+			/*break ;*/
+		/*pthread_mutex_unlock(&philo->write_lock);*/
 	}
 	return (NULL);
 }
@@ -52,6 +52,7 @@ int start_taking_forks(t_philo *philo, int index, struct timeval *lastmeal)
 	   if (philo->settings->time_to_eat > time_before_death)
 	   {
 		   	usleep(time_before_death * 1000);
+			/*printf("Philo %d about to die bruh\n", index + 1);*/
 		   	if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
 				return (EXIT_FAILURE);
 		   	pthread_mutex_lock(&philo->write_lock);
@@ -87,6 +88,8 @@ int start_eating(t_philo *philo, int index, struct timeval *lastmeal)
 	usleep(philo->settings->time_to_eat * 1000);
 	release_fork(philo, index);
 	release_fork(philo, (index + 1) % philo->settings->nb_philo);
+	/*if (index + 1 == 2)*/
+		/*printf("Philo 2 finished eating\n");*/
 	return (EXIT_SUCCESS);
 }
 
