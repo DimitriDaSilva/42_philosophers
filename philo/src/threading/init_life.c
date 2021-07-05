@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:58:13 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 10:35:54 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:02:17 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ void	*init_life(void *arg)
 			break ;
 		if (start_thinking(philo, index) != EXIT_SUCCESS)
 			break ;
-		/*pthread_mutex_lock(&philo->write_lock);*/
-		/*if (philo->is_one_philo_dead == 1)*/
-			/*break ;*/
-		/*pthread_mutex_unlock(&philo->write_lock);*/
 	}
 	return (NULL);
 }
@@ -48,25 +44,22 @@ int start_taking_forks(t_philo *philo, int index, struct timeval *lastmeal)
 	if (lastmeal->tv_usec != 0)
 	{
 		time_before_death = get_time_before_death(philo, lastmeal);
-		/*printf("Time_before_death: \"%d\"\n", time_before_death);*/
-	   if (philo->settings->time_to_eat > time_before_death)
+	   if (philo->settings->time_to_eat * 2 > time_before_death + philo->settings->time_to_die)
 	   {
-		   	usleep(time_before_death * 1000);
-			/*printf("Philo %d about to die bruh\n", index + 1);*/
-		   	if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
-				return (EXIT_FAILURE);
-		   	pthread_mutex_lock(&philo->write_lock);
-		   	philo->is_one_philo_dead = 1;
-		   	pthread_mutex_unlock(&philo->write_lock);
-			/*printf("Finished\n");*/
-		   	return (EXIT_FAILURE);
+		   usleep(time_before_death * 1000);
+		   if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
+			   return (EXIT_FAILURE);
+		   pthread_mutex_lock(&philo->write_lock);
+		   philo->is_one_philo_dead = 1;
+		   pthread_mutex_unlock(&philo->write_lock);
+		   return (EXIT_FAILURE);
 	   }
 	}
 	if (index % 2 != 0)
 	{
 		if (take_fork(philo, index, index) != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
-   		if (take_fork(philo, index, (index + 1) % philo->settings->nb_philo) != EXIT_SUCCESS)
+		if (take_fork(philo, index, (index + 1) % philo->settings->nb_philo) != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
 	}
 	else

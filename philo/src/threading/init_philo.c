@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:41:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 10:36:32 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:02:29 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	init_philo_join(t_philo *philo)
 	{
 		if (pthread_join(philo->threads[i], NULL) != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
-		/*printf("Thread %d finished\n", i + 1);*/
 	}
 	return (EXIT_SUCCESS);
 }
