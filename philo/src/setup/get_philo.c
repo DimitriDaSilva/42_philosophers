@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 12:24:34 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:13:06 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ t_philo	*get_philo(int argc, char *argv[])
 	if (gettimeofday(&philo->program_start, NULL) != EXIT_SUCCESS)
 		return (NULL);
 	philo->settings = get_settings(argc, argv);
+	if (!philo->settings)
+		return (NULL);
+	philo->philos = get_single_philos(philo->settings);
+	if (!philo->settings)
+		return (NULL);
 	philo->threads = ft_calloc(philo->settings->nb_philo, sizeof(pthread_t));
 	if (!philo->threads)
 		return (NULL);
@@ -48,4 +53,22 @@ t_settings	*get_settings(int argc, char *argv[])
 	else
 		settings->nb_times_to_eat = -1;
 	return (settings);
+}
+
+t_single_philo	*get_single_philos(t_settings *settings)
+{
+	t_single_philo	*philos;
+	int				i;
+
+	philos = ft_calloc(settings->nb_philo, sizeof(t_single_philo));
+	if (!philos)
+		return (NULL);
+	i = 0;
+	while (i < settings->nb_philo)
+	{
+		philos[i].index = i;
+		philos[i].meals_left = settings->nb_times_to_eat;
+		i++;
+	}
+	return (philos);
 }

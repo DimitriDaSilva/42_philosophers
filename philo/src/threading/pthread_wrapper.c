@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philo.c                                       :+:      :+:    :+:   */
+/*   pthread_wrapper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:41:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 12:25:37 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:01:51 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init_philo.h"
+#include "pthread_wrapper.h"
 
 int	init_philo(t_philo *philo)
 {
@@ -50,7 +50,7 @@ int	init_philo_create(t_philo *philo)
 	while (++i < philo->settings->nb_philo)
 	{
 		if (pthread_create(&philo->threads[i], NULL,
-				&init_life, philo) != EXIT_SUCCESS)
+				&start_living, philo) != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

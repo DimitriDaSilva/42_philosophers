@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 16:47:34 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 12:25:07 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 14:50:59 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,15 @@ int	main(int argc, char *argv[])
 	}
 	philo = get_philo(argc, argv);
 	if (!philo)
+	{
+		printf("Error: could not get philo\n");
 		return (2);
+	}
 	if (init_philo(philo) != EXIT_SUCCESS)
+	{
+		printf("Error: pthread function returned exit_failure\n");
 		return (3);
+	}
 	free_memory(philo);
 	return (EXIT_SUCCESS);
-}
-
-void	free_memory(t_philo *philo)
-{
-	free(philo->threads);
-	free(philo->forks);
-	free(philo->settings);
-	free(philo);
 }

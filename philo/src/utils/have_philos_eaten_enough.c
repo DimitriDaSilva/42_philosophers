@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_philo.h                                        :+:      :+:    :+:   */
+/*   have_philos_eaten_enough.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 17:41:18 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 14:43:09 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/07/05 15:47:20 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/05 16:13:35 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_PHILO_H
-# define GET_PHILO_H
+#include "utils.h"
 
-# include "main.h"
+int	have_philos_eaten_enough(t_philo *simulation)
+{
+	int	check;
+	int	i;
 
-t_philo			*get_philo(int argc, char *argv[]);
-t_settings		*get_settings(int argc, char *argv[]);
-t_single_philo	*get_single_philos(t_settings *settings);
-
-#endif
+	if (simulation->settings->nb_times_to_eat == -1)
+		return (0);
+	check = 1;
+	i = 0;
+	while (i < simulation->settings->nb_philo)
+	{
+		if (simulation->philos[i].meals_left > 0)
+		{
+			check = 0;
+			break ;
+		}
+		i++;
+	}
+	return (check);
+}

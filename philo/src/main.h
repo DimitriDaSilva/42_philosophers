@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 16:48:16 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 12:21:22 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:03:06 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@
 
 # include "libft_light.h"
 # include "structs.h"
-# include "get_philo.h"
-# include "init_philo.h"
-# include "init_life.h"
 # include "error.h"
+# include "get_philo.h"
+# include "pthread_wrapper.h"
+# include "start_living.h"
 # include "utils.h"
-
-void	free_memory(t_philo *philo);
 
 #endif

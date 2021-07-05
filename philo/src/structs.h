@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:23:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 12:23:30 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 16:07:45 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_single_philo
 {
 	int				index;
-	struct timeval	lastmeal;
+	struct timeval	last_meal;
 	int				meals_left;
 }					t_single_philo;
 
@@ -39,7 +39,6 @@ typedef struct s_philo
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
 	int				has_a_philo_died;
-	int				count;
 	struct timeval	program_start;
 }					t_philo;
 
