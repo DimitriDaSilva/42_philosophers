@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 17:48:47 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:07:59 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 void	*start_living(void *arg)
 {
-	static int		i = 0;
-	t_simul			*philo;
-	t_single_philo	*single_philo;
+	static int	i = 0;
+	t_simul		*simul;
+	t_philo		*philo;
 
-	philo = (t_simul *)arg;
-	pthread_mutex_lock(&philo->write_lock);
-	single_philo = &philo->philos[i++];
-	pthread_mutex_unlock(&philo->write_lock);
+	simul = (t_simul *)arg;
+	pthread_mutex_lock(&simul->increment_lock);
+	philo = &simul->philos[i++];
+	pthread_mutex_unlock(&simul->increment_lock);
 	while (1)
 	{
-		if (start_taking_forks(philo, single_philo) != EXIT_SUCCESS)
+		if (start_taking_forks(simul, philo) != EXIT_SUCCESS)
 			break ;
-		if (start_eating(philo, single_philo) != EXIT_SUCCESS)
+		if (start_eating(simul, philo) != EXIT_SUCCESS)
 			break ;
-		if (start_sleeping(philo, single_philo) != EXIT_SUCCESS)
+		if (start_sleeping(simul, philo) != EXIT_SUCCESS)
 			break ;
-		if (start_thinking(philo, single_philo) != EXIT_SUCCESS)
+		if (start_thinking(simul, philo) != EXIT_SUCCESS)
 			break ;
 	}
 	return (NULL);
 }
 
-int	start_taking_forks(t_simul *philo, t_single_philo *single_philo)
+int	start_taking_forks(t_simul *philo, t_philo *single_philo)
 {
 	int				index;
 	struct timeval	*last_meal;
@@ -53,9 +53,9 @@ int	start_taking_forks(t_simul *philo, t_single_philo *single_philo)
 			usleep(time_before_death * 1000);
 			if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
 				return (EXIT_FAILURE);
-			pthread_mutex_lock(&philo->write_lock);
+			pthread_mutex_lock(&philo->death_lock);
 			philo->has_a_philo_died = 1;
-			pthread_mutex_unlock(&philo->write_lock);
+			pthread_mutex_unlock(&philo->death_lock);
 			return (EXIT_FAILURE);
 		}
 	}
@@ -83,7 +83,7 @@ int	start_taking_forks(t_simul *philo, t_single_philo *single_philo)
 	return (EXIT_SUCCESS);
 }
 
-int	start_eating(t_simul *philo, t_single_philo *single_philo)
+int	start_eating(t_simul *philo, t_philo *single_philo)
 {
 	int				index;
 	struct timeval	*last_meal;
@@ -94,9 +94,9 @@ int	start_eating(t_simul *philo, t_single_philo *single_philo)
 	if (print_status(philo, index + 1, "is eating") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	usleep(philo->settings->time_to_eat * 1000);
-	pthread_mutex_lock(&philo->write_lock);
+	pthread_mutex_lock(&philo->meals_left_lock);
 	single_philo->meals_left--;
-	pthread_mutex_unlock(&philo->write_lock);
+	pthread_mutex_unlock(&philo->meals_left_lock);
 	release_fork(philo, index);
 	release_fork(philo, (index + 1) % philo->settings->nb_philo);
 	return (EXIT_SUCCESS);
@@ -121,7 +121,7 @@ int	release_fork(t_simul *philo, int fork_index)
 	return (EXIT_SUCCESS);
 }
 
-int	start_sleeping(t_simul *philo, t_single_philo *single_philo)
+int	start_sleeping(t_simul *philo, t_philo *single_philo)
 {
 	int				index;
 	struct timeval	*last_meal;
@@ -137,16 +137,16 @@ int	start_sleeping(t_simul *philo, t_single_philo *single_philo)
 		usleep(time_before_death * 1000);
 		if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
-		pthread_mutex_lock(&philo->write_lock);
+		pthread_mutex_lock(&philo->death_lock);
 		philo->has_a_philo_died = 1;
-		pthread_mutex_unlock(&philo->write_lock);
+		pthread_mutex_unlock(&philo->death_lock);
 	}
 	else
 		usleep(philo->settings->time_to_sleep * 1000);
 	return (EXIT_SUCCESS);
 }
 
-int	start_thinking(t_simul *philo, t_single_philo *single_philo)
+int	start_thinking(t_simul *philo, t_philo *single_philo)
 {
 	int				index;
 

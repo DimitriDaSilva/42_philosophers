@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:41:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 17:48:46 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:06:21 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	init_simul(t_simul *philo)
 {
-	if (pthread_mutex_init(&philo->write_lock, NULL) != EXIT_SUCCESS)
+	if (pthread_mutex_init(&philo->increment_lock, NULL) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	if (pthread_mutex_init(&philo->death_lock, NULL) != EXIT_SUCCESS)
+		   return (EXIT_FAILURE);
+	if (pthread_mutex_init(&philo->meals_left_lock, NULL) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	if (init_simul_mutex_init(philo) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
@@ -24,7 +28,11 @@ int	init_simul(t_simul *philo)
 		return (EXIT_FAILURE);
 	if (init_simul_mutex_destroy(philo) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (pthread_mutex_destroy(&philo->write_lock) != EXIT_SUCCESS)
+	if (pthread_mutex_destroy(&philo->increment_lock) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	if (pthread_mutex_destroy(&philo->death_lock) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	if (pthread_mutex_destroy(&philo->meals_left_lock) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

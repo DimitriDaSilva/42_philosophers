@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 17:56:47 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:57:30 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ t_settings	*get_settings(int argc, char *argv[])
 	return (settings);
 }
 
-t_single_philo	*get_philos(t_settings *settings)
+t_philo	*get_philos(t_settings *settings)
 {
-	t_single_philo	*philos;
+	t_philo	*philos;
 	int				i;
 
-	philos = ft_calloc(settings->nb_philo, sizeof(t_single_philo));
+	philos = ft_calloc(settings->nb_philo, sizeof(t_philo));
 	if (!philos)
 		return (NULL);
 	i = 0;
