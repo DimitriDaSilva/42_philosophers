@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_philo.h                                        :+:      :+:    :+:   */
+/*   setup_simul.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:41:18 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 14:43:09 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:56:47 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "main.h"
 
-t_philo			*get_philo(int argc, char *argv[]);
+t_simul			*setup_simul(int argc, char *argv[]);
 t_settings		*get_settings(int argc, char *argv[]);
-t_single_philo	*get_single_philos(t_settings *settings);
+t_single_philo	*get_philos(t_settings *settings);
 
 #endif

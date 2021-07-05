@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_philo.c                                        :+:      :+:    :+:   */
+/*   setup_simul.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 15:13:06 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:56:47 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_philo.h"
+#include "setup_simul.h"
 
-t_philo	*get_philo(int argc, char *argv[])
+t_simul	*setup_simul(int argc, char *argv[])
 {
-	t_philo	*philo;
+	t_simul	*simul;
 
-	philo = ft_calloc(1, sizeof(t_philo));
-	if (!philo)
+	simul = ft_calloc(1, sizeof(t_simul));
+	if (!simul)
 		return (NULL);
-	if (gettimeofday(&philo->program_start, NULL) != EXIT_SUCCESS)
+	if (gettimeofday(&simul->prog_start, NULL) != EXIT_SUCCESS)
 		return (NULL);
-	philo->settings = get_settings(argc, argv);
-	if (!philo->settings)
+	simul->settings = get_settings(argc, argv);
+	if (!simul->settings)
 		return (NULL);
-	philo->philos = get_single_philos(philo->settings);
-	if (!philo->settings)
+	simul->philos = get_philos(simul->settings);
+	if (!simul->settings)
 		return (NULL);
-	philo->threads = ft_calloc(philo->settings->nb_philo, sizeof(pthread_t));
-	if (!philo->threads)
+	simul->threads = ft_calloc(simul->settings->nb_philo, sizeof(pthread_t));
+	if (!simul->threads)
 		return (NULL);
-	philo->forks = ft_calloc(philo->settings->nb_philo,
+	simul->forks = ft_calloc(simul->settings->nb_philo,
 			sizeof(pthread_mutex_t));
-	if (!philo->forks)
+	if (!simul->forks)
 		return (NULL);
-	return (philo);
+	return (simul);
 }
 
 t_settings	*get_settings(int argc, char *argv[])
@@ -55,7 +55,7 @@ t_settings	*get_settings(int argc, char *argv[])
 	return (settings);
 }
 
-t_single_philo	*get_single_philos(t_settings *settings)
+t_single_philo	*get_philos(t_settings *settings)
 {
 	t_single_philo	*philos;
 	int				i;

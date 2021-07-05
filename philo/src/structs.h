@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:23:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 16:07:45 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:56:20 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_settings
 	int				nb_times_to_eat;
 }					t_settings;
 
-typedef struct s_philo
+typedef struct s_simul
 {
 	t_single_philo	*philos;
 	t_settings		*settings;
@@ -39,7 +39,7 @@ typedef struct s_philo
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
 	int				has_a_philo_died;
-	struct timeval	program_start;
-}					t_philo;
+	struct timeval	prog_start;
+}					t_simul;
 
 #endif

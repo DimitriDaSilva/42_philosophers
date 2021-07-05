@@ -6,13 +6,13 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:52:23 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 14:53:40 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:48:46 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-long	get_time_before_death(t_philo *philo, struct timeval *lastmeal)
+long	get_time_before_death(t_simul *philo, struct timeval *lastmeal)
 {
 	long	time_before_death;
 	int		time_to_die;

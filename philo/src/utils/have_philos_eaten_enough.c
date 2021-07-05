@@ -6,13 +6,13 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 15:47:20 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 16:13:35 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:48:46 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	have_philos_eaten_enough(t_philo *simulation)
+int	have_philos_eaten_enough(t_simul *simulation)
 {
 	int	check;
 	int	i;

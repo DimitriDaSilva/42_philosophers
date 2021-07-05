@@ -6,13 +6,13 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 09:38:27 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 16:05:35 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:56:20 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	print_status(t_philo *philo, int nb_index, char *status)
+int	print_status(t_simul *philo, int nb_index, char *status)
 {
 	struct timeval	curr_time;
 	char			*timestamp;
@@ -27,7 +27,7 @@ int	print_status(t_philo *philo, int nb_index, char *status)
 	}
 	if (gettimeofday(&curr_time, NULL) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	timestamp = get_timestamp(&curr_time, &philo->program_start);
+	timestamp = get_timestamp(&curr_time, &philo->prog_start);
 	if (!timestamp)
 		return (EXIT_FAILURE);
 	index = ft_itoa(nb_index);

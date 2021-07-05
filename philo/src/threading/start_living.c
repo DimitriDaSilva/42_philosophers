@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 17:19:28 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:48:47 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	*start_living(void *arg)
 {
 	static int		i = 0;
-	t_philo			*philo;
+	t_simul			*philo;
 	t_single_philo	*single_philo;
 
-	philo = (t_philo *)arg;
+	philo = (t_simul *)arg;
 	pthread_mutex_lock(&philo->write_lock);
 	single_philo = &philo->philos[i++];
 	pthread_mutex_unlock(&philo->write_lock);
@@ -36,7 +36,7 @@ void	*start_living(void *arg)
 	return (NULL);
 }
 
-int	start_taking_forks(t_philo *philo, t_single_philo *single_philo)
+int	start_taking_forks(t_simul *philo, t_single_philo *single_philo)
 {
 	int				index;
 	struct timeval	*last_meal;
@@ -83,7 +83,7 @@ int	start_taking_forks(t_philo *philo, t_single_philo *single_philo)
 	return (EXIT_SUCCESS);
 }
 
-int	start_eating(t_philo *philo, t_single_philo *single_philo)
+int	start_eating(t_simul *philo, t_single_philo *single_philo)
 {
 	int				index;
 	struct timeval	*last_meal;
@@ -102,7 +102,7 @@ int	start_eating(t_philo *philo, t_single_philo *single_philo)
 	return (EXIT_SUCCESS);
 }
 
-int	take_fork(t_philo *philo, int philo_index, int fork_index)
+int	take_fork(t_simul *philo, int philo_index, int fork_index)
 {
 	if (pthread_mutex_lock(&philo->forks[fork_index]) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
@@ -114,14 +114,14 @@ int	take_fork(t_philo *philo, int philo_index, int fork_index)
 	return (EXIT_SUCCESS);
 }
 
-int	release_fork(t_philo *philo, int fork_index)
+int	release_fork(t_simul *philo, int fork_index)
 {
 	if (pthread_mutex_unlock(&philo->forks[fork_index]) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
-int	start_sleeping(t_philo *philo, t_single_philo *single_philo)
+int	start_sleeping(t_simul *philo, t_single_philo *single_philo)
 {
 	int				index;
 	struct timeval	*last_meal;
@@ -146,7 +146,7 @@ int	start_sleeping(t_philo *philo, t_single_philo *single_philo)
 	return (EXIT_SUCCESS);
 }
 
-int	start_thinking(t_philo *philo, t_single_philo *single_philo)
+int	start_thinking(t_simul *philo, t_single_philo *single_philo)
 {
 	int				index;
 

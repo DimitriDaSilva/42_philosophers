@@ -6,30 +6,30 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:41:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 15:01:51 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:48:46 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pthread_wrapper.h"
 
-int	init_philo(t_philo *philo)
+int	init_simul(t_simul *philo)
 {
 	if (pthread_mutex_init(&philo->write_lock, NULL) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (init_philo_mutex_init(philo) != EXIT_SUCCESS)
+	if (init_simul_mutex_init(philo) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (init_philo_create(philo) != EXIT_SUCCESS)
+	if (init_simul_create(philo) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (init_philo_join(philo) != EXIT_SUCCESS)
+	if (init_simul_join(philo) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (init_philo_mutex_destroy(philo) != EXIT_SUCCESS)
+	if (init_simul_mutex_destroy(philo) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	if (pthread_mutex_destroy(&philo->write_lock) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
-int	init_philo_mutex_init(t_philo *philo)
+int	init_simul_mutex_init(t_simul *philo)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ int	init_philo_mutex_init(t_philo *philo)
 	return (EXIT_SUCCESS);
 }
 
-int	init_philo_create(t_philo *philo)
+int	init_simul_create(t_simul *philo)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ int	init_philo_create(t_philo *philo)
 	return (EXIT_SUCCESS);
 }
 
-int	init_philo_join(t_philo *philo)
+int	init_simul_join(t_simul *philo)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ int	init_philo_join(t_philo *philo)
 	return (EXIT_SUCCESS);
 }
 
-int	init_philo_mutex_destroy(t_philo *philo)
+int	init_simul_mutex_destroy(t_simul *philo)
 {
 	int	i;
 
