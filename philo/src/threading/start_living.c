@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 16:45:00 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 17:27:21 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,23 @@ void	*start_living(void *arg)
 	return (NULL);
 }
 
-int	start_taking_forks(t_simul *philo, t_philo *single_philo)
+int	start_taking_forks(t_simul *simul, t_philo *philo)
 {
-	int				index;
-	int				second_fork_index;
+	int	index;
+	int	second_fork_index;
 
-	index = single_philo->index;
-	if (is_philo_about_to_die(philo, single_philo))
+	index = philo->index;
+	if (is_philo_about_to_die(simul, philo))
 		return (EXIT_FAILURE);
-	second_fork_index = (index + 1) % philo->settings->nb_philo;
+	second_fork_index = (index + 1) % simul->settings->nb_philo;
 	if (!ft_is_even(index))
 	{
-		if (take_two_forks(philo, index, index, second_fork_index))
+		if (take_two_forks(simul, index, index, second_fork_index))
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (take_two_forks(philo, index, second_fork_index, index))
+		if (take_two_forks(simul, index, second_fork_index, index))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -91,37 +91,33 @@ int	start_eating(t_simul *simul, t_philo *philo)
 	return (EXIT_SUCCESS);
 }
 
-int	start_sleeping(t_simul *philo, t_philo *single_philo)
+int	start_sleeping(t_simul *simul, t_philo *philo)
 {
 	int				index;
 	struct timeval	*last_meal;
 	int				time_before_death;
 
-	index = single_philo->index;
-	last_meal = &single_philo->last_meal;
-	if (print_status(philo, index + 1, "is sleeping") != EXIT_SUCCESS)
+	index = philo->index;
+	last_meal = &philo->last_meal;
+	if (print_status(simul, index + 1, "is sleeping") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	time_before_death = get_time_before_death(philo, last_meal);
-	if (philo->settings->time_to_sleep > time_before_death)
+	time_before_death = get_time_before_death(simul, last_meal);
+	if (simul->settings->time_to_sleep > time_before_death)
 	{
-		usleep(time_before_death * 1000);
-		if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
+		if (start_dying(simul, index + 1, time_before_death) != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
-		pthread_mutex_lock(&philo->death_lock);
-		philo->has_a_philo_died = 1;
-		pthread_mutex_unlock(&philo->death_lock);
 	}
 	else
-		usleep(philo->settings->time_to_sleep * 1000);
+		usleep(simul->settings->time_to_sleep * 1000);
 	return (EXIT_SUCCESS);
 }
 
-int	start_thinking(t_simul *philo, t_philo *single_philo)
+int	start_thinking(t_simul *simul, t_philo *philo)
 {
-	int				index;
+	int	index;
 
-	index = single_philo->index;
-	if (print_status(philo, index + 1, "is thinking") != EXIT_SUCCESS)
+	index = philo->index;
+	if (print_status(simul, index + 1, "is thinking") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

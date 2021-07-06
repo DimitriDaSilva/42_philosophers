@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time_before_death.c                            :+:      :+:    :+:   */
+/*   start_dying.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/05 14:52:23 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 17:13:09 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/07/06 17:17:49 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/06 17:24:21 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "start_dying.h"
 
-long	get_time_before_death(t_simul *simul, struct timeval *last_meal)
+int	start_dying(t_simul *simul, int index, int time_before_death)
 {
-	long	time_before_death;
-	int		time_to_die;
-	int		time_since_last_meal;
-
-	time_to_die = simul->settings->time_to_die;
-	time_since_last_meal = get_time_since_last_meal(last_meal);
-	time_before_death = time_to_die - time_since_last_meal;
-	return (time_before_death);
+	usleep(time_before_death * 1000);
+	if (print_status(simul, index, "died") != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	pthread_mutex_lock(&simul->death_lock);
+	simul->has_a_philo_died = 1;
+	pthread_mutex_unlock(&simul->death_lock);
+	return (EXIT_SUCCESS);
 }
