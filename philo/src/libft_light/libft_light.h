@@ -21,6 +21,7 @@
 long long	ft_abs(long long n);
 long long	ft_atoi(const char *str);
 void		*ft_calloc(size_t nmemb, size_t size);
+int			ft_is_even(long long nb);
 char		*ft_itoa(long long n);
 int			ft_putchar(char c);
 int			ft_putstr(char *str);

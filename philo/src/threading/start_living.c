@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 18:07:59 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 11:17:04 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,24 @@ int	start_taking_forks(t_simul *philo, t_philo *single_philo)
 
 	index = single_philo->index;
 	last_meal = &single_philo->last_meal;
-	if (last_meal->tv_usec != 0)
+	if (single_philo->has_had_first_meal == 1)
 	{
 		time_before_death = get_time_before_death(philo, last_meal);
 		if (philo->settings->time_to_eat * 2 > time_before_death + philo->settings->time_to_die)
+		{
+			usleep(time_before_death * 1000);
+			if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
+				return (EXIT_FAILURE);
+			pthread_mutex_lock(&philo->death_lock);
+			philo->has_a_philo_died = 1;
+			pthread_mutex_unlock(&philo->death_lock);
+			return (EXIT_FAILURE);
+		}
+	}
+	else if (!is_first_wave_to_eat(philo, single_philo))
+	{
+		time_before_death = get_time_before_death(philo, last_meal);
+		if (philo->settings->time_to_eat > time_before_death)
 		{
 			usleep(time_before_death * 1000);
 			if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
@@ -83,22 +97,24 @@ int	start_taking_forks(t_simul *philo, t_philo *single_philo)
 	return (EXIT_SUCCESS);
 }
 
-int	start_eating(t_simul *philo, t_philo *single_philo)
+int	start_eating(t_simul *simul, t_philo *philo)
 {
 	int				index;
 	struct timeval	*last_meal;
 
-	index = single_philo->index;
-	last_meal = &single_philo->last_meal;
+	index = philo->index;
+	last_meal = &philo->last_meal;
 	gettimeofday(last_meal, NULL);
-	if (print_status(philo, index + 1, "is eating") != EXIT_SUCCESS)
+	if (print_status(simul, index + 1, "is eating") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	usleep(philo->settings->time_to_eat * 1000);
-	pthread_mutex_lock(&philo->meals_left_lock);
-	single_philo->meals_left--;
-	pthread_mutex_unlock(&philo->meals_left_lock);
-	release_fork(philo, index);
-	release_fork(philo, (index + 1) % philo->settings->nb_philo);
+	usleep(simul->settings->time_to_eat * 1000);
+	pthread_mutex_lock(&simul->meals_left_lock);
+	philo->meals_left--;
+	pthread_mutex_unlock(&simul->meals_left_lock);
+	if (philo->has_had_first_meal == 0)
+		philo->has_had_first_meal = 1;
+	release_fork(simul, index);
+	release_fork(simul, (index + 1) % simul->settings->nb_philo);
 	return (EXIT_SUCCESS);
 }
 

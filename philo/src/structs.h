@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:23:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 18:05:09 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:56:21 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_philo
 	int				index;
 	struct timeval	last_meal;
 	int				meals_left;
+	int				has_had_first_meal;
 }					t_philo;
 
 typedef struct s_settings

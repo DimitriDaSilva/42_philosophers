@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   has_a_philo_died.c                                 :+:      :+:    :+:   */
+/*   is_not_first_wave_to_eat.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/05 18:14:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 11:03:12 by dda-silv         ###   ########.fr       */
+/*   Created: 2021/07/06 09:40:42 by dda-silv          #+#    #+#             */
+/*   Updated: 2021/07/06 09:54:22 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	has_a_philo_died(t_simul *simul)
+int	is_first_wave_to_eat(t_simul *simul, t_philo *philo)
 {
 	int	check;
+	int	nb_of_philo;
+	int	index_philo;
 
-	check = 0;
-	pthread_mutex_lock(&simul->death_lock);
-	if (simul->has_a_philo_died == 1)
+	check = 1;
+	nb_of_philo = simul->settings->nb_philo;
+	index_philo = philo->index + 1;
+	if (!ft_is_even(index_philo) && ft_is_even(nb_of_philo))
 		check = 1;
-	pthread_mutex_unlock(&simul->death_lock);
+	else if (!ft_is_even(index_philo) && !ft_is_even(nb_of_philo)
+			&& index_philo == nb_of_philo)
+		check = 0;
+	else if (ft_is_even(index_philo))
+		check = 0;
 	return (check);
 }
