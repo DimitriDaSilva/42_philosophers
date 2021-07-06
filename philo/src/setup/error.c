@@ -6,11 +6,21 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 12:00:58 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 12:24:48 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:08:03 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
+
+/*
+** Check if there are invalid args supplied
+** @param:	- [int] arg count
+**			- [char **] argv values
+** @return:	[int] true or false
+** Line-by-line comments:
+** @3-4		There can be an optional argument
+** @5-6		All arguments need to be numbers without decimals nor negative sign
+*/
 
 int	has_invalid_args(int argc, char *argv[])
 {
@@ -23,7 +33,6 @@ int	has_invalid_args(int argc, char *argv[])
 	else
 		check = 0;
 	return (check);
-	(void)argv;
 }
 
 int	has_non_numeric_arg(int argc, char *argv[])

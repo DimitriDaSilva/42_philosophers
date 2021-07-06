@@ -6,11 +6,18 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 16:47:34 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 17:55:07 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:05:31 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+/*
+** Philosophers is a simulation illustrating the uses of threads
+** @param:	- [int] arg count
+**			- [char **] argv values
+** @return:	[int] exit status
+*/
 
 int	main(int argc, char *argv[])
 {
