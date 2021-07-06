@@ -6,13 +6,13 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 09:38:27 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 11:32:32 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 12:08:53 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static char *get_status(t_simul *simul, int nb_index, char *life_status)
+static char	*get_status(t_simul *simul, int nb_index, char *life_status)
 {
 	char	*status;
 	char	*timestamp;

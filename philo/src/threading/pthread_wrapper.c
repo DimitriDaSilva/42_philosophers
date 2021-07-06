@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:41:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/05 18:28:34 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 12:08:38 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	init_simul_create(t_simul *simul)
 	while (i < simul->settings->nb_philo)
 	{
 		if (pthread_create(&simul->threads[i],
-					NULL,
-					&start_living,
-					simul) != EXIT_SUCCESS)
+				NULL,
+				&start_living,
+				simul) != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
 		i++;
 	}

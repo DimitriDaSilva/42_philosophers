@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 11:17:04 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 12:08:10 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,67 +36,6 @@ void	*start_living(void *arg)
 	return (NULL);
 }
 
-int	start_taking_forks(t_simul *philo, t_philo *single_philo)
-{
-	int				index;
-	struct timeval	*last_meal;
-	int				time_before_death;
-	int				second_fork_index;
-
-	index = single_philo->index;
-	last_meal = &single_philo->last_meal;
-	if (single_philo->has_had_first_meal == 1)
-	{
-		time_before_death = get_time_before_death(philo, last_meal);
-		if (philo->settings->time_to_eat * 2 > time_before_death + philo->settings->time_to_die)
-		{
-			usleep(time_before_death * 1000);
-			if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
-				return (EXIT_FAILURE);
-			pthread_mutex_lock(&philo->death_lock);
-			philo->has_a_philo_died = 1;
-			pthread_mutex_unlock(&philo->death_lock);
-			return (EXIT_FAILURE);
-		}
-	}
-	else if (!is_first_wave_to_eat(philo, single_philo))
-	{
-		time_before_death = get_time_before_death(philo, last_meal);
-		if (philo->settings->time_to_eat > time_before_death)
-		{
-			usleep(time_before_death * 1000);
-			if (print_status(philo, index + 1, "died") != EXIT_SUCCESS)
-				return (EXIT_FAILURE);
-			pthread_mutex_lock(&philo->death_lock);
-			philo->has_a_philo_died = 1;
-			pthread_mutex_unlock(&philo->death_lock);
-			return (EXIT_FAILURE);
-		}
-	}
-	second_fork_index = (index + 1) % philo->settings->nb_philo;
-	if (index % 2 != 0)
-	{
-		if (take_fork(philo, index, index) != EXIT_SUCCESS)
-			return (EXIT_FAILURE);
-		if (take_fork(philo, index, second_fork_index) != EXIT_SUCCESS)
-		{
-			release_fork(philo, index);
-			return (EXIT_FAILURE);
-		}
-	}
-	else
-	{
-		if (take_fork(philo, index, second_fork_index) != EXIT_SUCCESS)
-			return (EXIT_FAILURE);
-		if (take_fork(philo, index, index) != EXIT_SUCCESS)
-		{
-			release_fork(philo, second_fork_index);
-			return (EXIT_FAILURE);
-		}
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	start_eating(t_simul *simul, t_philo *philo)
 {
 	int				index;
@@ -118,30 +57,11 @@ int	start_eating(t_simul *simul, t_philo *philo)
 	return (EXIT_SUCCESS);
 }
 
-int	take_fork(t_simul *philo, int philo_index, int fork_index)
-{
-	if (pthread_mutex_lock(&philo->forks[fork_index]) != EXIT_SUCCESS)
-		return (EXIT_FAILURE);
-	if (print_status(philo, philo_index + 1, "has taken a fork") != EXIT_SUCCESS)
-	{
-		release_fork(philo, fork_index);
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
-int	release_fork(t_simul *philo, int fork_index)
-{
-	if (pthread_mutex_unlock(&philo->forks[fork_index]) != EXIT_SUCCESS)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
 int	start_sleeping(t_simul *philo, t_philo *single_philo)
 {
 	int				index;
 	struct timeval	*last_meal;
-	int	time_before_death;
+	int				time_before_death;
 
 	index = single_philo->index;
 	last_meal = &single_philo->last_meal;
