@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 14:38:15 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 16:56:13 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_simul	*setup_simul(int argc, char *argv[])
 	simul->settings = get_settings(argc, argv);
 	if (!simul->settings)
 		return (NULL);
-	simul->philos = get_philos(simul->settings);
-	if (!simul->settings)
+	simul->philos = get_philos(simul->settings, &simul->prog_start);
+if (!simul->settings)
 		return (NULL);
 	simul->threads = ft_calloc(simul->settings->nb_philo, sizeof(pthread_t));
 	if (!simul->threads)
@@ -79,7 +79,7 @@ t_settings	*get_settings(int argc, char *argv[])
 ** @return:	[t_philo *] array of t_philo
 */
 
-t_philo	*get_philos(t_settings *settings)
+t_philo	*get_philos(t_settings *settings, struct timeval *prog_start)
 {
 	t_philo	*philos;
 	int		i;
@@ -91,6 +91,7 @@ t_philo	*get_philos(t_settings *settings)
 	while (i < settings->nb_philo)
 	{
 		philos[i].index = i;
+		philos[i].last_meal = *prog_start;
 		philos[i].meals_left = settings->nb_times_to_eat;
 		i++;
 	}
