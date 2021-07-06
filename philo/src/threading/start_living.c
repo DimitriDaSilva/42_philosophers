@@ -6,11 +6,23 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 12:08:10 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 16:45:00 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "start_living.h"
+
+/*
+** Entrypoint for the threads
+** @param:	- [void *] passed t_simul *
+** @return:	[void *] return value (not used in this program)
+** Line-by-line comments:
+** @6-8		We increment i so that the philo var points to a different item
+**			of the array of philos in each thread
+** @9		Infinite loop that is broken if either of the function calls fails.
+**			That can happen for 3 reasons: a philo has died, they have reached
+** 			the number of meals required or an error
+*/
 
 void	*start_living(void *arg)
 {
@@ -34,6 +46,28 @@ void	*start_living(void *arg)
 			break ;
 	}
 	return (NULL);
+}
+
+int	start_taking_forks(t_simul *philo, t_philo *single_philo)
+{
+	int				index;
+	int				second_fork_index;
+
+	index = single_philo->index;
+	if (is_philo_about_to_die(philo, single_philo))
+		return (EXIT_FAILURE);
+	second_fork_index = (index + 1) % philo->settings->nb_philo;
+	if (!ft_is_even(index))
+	{
+		if (take_two_forks(philo, index, index, second_fork_index))
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		if (take_two_forks(philo, index, second_fork_index, index))
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
 
 int	start_eating(t_simul *simul, t_philo *philo)

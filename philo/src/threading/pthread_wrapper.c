@@ -6,11 +6,17 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:41:10 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 12:08:38 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/06 16:36:13 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pthread_wrapper.h"
+
+/*
+** Standard wrapper functions for pthread
+** @param:	- [t_simul *] base struct of the program
+** @return:	[int] exit status (SUCCESS or FAILURE)
+*/
 
 int	init_simul(t_simul *simul)
 {
@@ -24,6 +30,12 @@ int	init_simul(t_simul *simul)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
+
+/*
+** Initializes all mutexes
+** @param:	- [t_simul *] base struct of the program
+** @return:	[int] exit status (SUCCESS or FAILURE)
+*/
 
 int	init_simul_mutex_init(t_simul *simul)
 {
@@ -45,6 +57,12 @@ int	init_simul_mutex_init(t_simul *simul)
 	return (EXIT_SUCCESS);
 }
 
+/*
+** Creates all threads
+** @param:	- [t_simul *] base struct of the program
+** @return:	[int] exit status (SUCCESS or FAILURE)
+*/
+
 int	init_simul_create(t_simul *simul)
 {
 	int	i;
@@ -62,6 +80,12 @@ int	init_simul_create(t_simul *simul)
 	return (EXIT_SUCCESS);
 }
 
+/*
+** Joins all threads
+** @param:	- [t_simul *] base struct of the program
+** @return:	[int] exit status (SUCCESS or FAILURE)
+*/
+
 int	init_simul_join(t_simul *simul)
 {
 	int	i;
@@ -75,6 +99,12 @@ int	init_simul_join(t_simul *simul)
 	}
 	return (EXIT_SUCCESS);
 }
+
+/*
+** Destroy all standing mutexes. They need to be unlocked by the threads
+** @param:	- [t_simul *] base struct of the program
+** @return:	[int] exit status (SUCCESS or FAILURE)
+*/
 
 int	init_simul_mutex_destroy(t_simul *simul)
 {
