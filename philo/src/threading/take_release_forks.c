@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 11:43:00 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/07 17:00:35 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:25:01 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,23 @@ int	take_fork(t_simul *simul, int philo_index, int fork_index)
 		release_fork(simul, fork_index);
 		return (EXIT_FAILURE);
 	}
+	return (EXIT_SUCCESS);
+}
+
+/*
+** Release both forks
+** @param:	- [t_simul *] base struct of the program
+**			- [int] philo's first fork to release. 0 based index
+**			- [int] philo's second fork to release. 0 based index
+** @return:	[int] exit status (SUCCESS or FAILURE)
+*/
+
+int	release_two_forks(t_simul *simul, int first_fork, int second_fork)
+{
+	if (release_fork(simul, first_fork) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	if (release_fork(simul, second_fork) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
