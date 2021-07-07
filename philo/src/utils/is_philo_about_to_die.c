@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:28:17 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/07 18:23:02 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/07 18:38:45 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	is_philo_about_to_die(t_simul *simul, t_philo *philo)
 	if (philo->has_had_first_meal == 1)
 	{
 		time_before_death = get_time_before_death(simul, last_meal);
-		if (simul->settings->time_to_eat * 2 > \
-				time_before_death + simul->settings->time_to_die)
+		if (simul->settings->time_to_eat * 2 + time_before_death > \
+				simul->settings->time_to_die)
 		{
 			start_dying(simul, index, time_before_death);
 			return (1);

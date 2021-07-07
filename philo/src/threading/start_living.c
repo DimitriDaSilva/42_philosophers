@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/07 18:28:30 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/07 18:34:27 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,14 @@ int	start_eating(t_simul *simul, t_philo *philo)
 		return (EXIT_FAILURE);
 	if (print_status(simul, index + 1, "is eating") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (is_first_wave_to_eat(simul, philo))
+	time_before_death = get_time_before_death(simul, last_meal);
+	if (simul->settings->time_to_eat > \
+			time_before_death)
 	{
-		time_before_death = get_time_before_death(simul, last_meal);
-		if (simul->settings->time_to_eat > \
-				time_before_death)
-		{
-			start_dying(simul, index, time_before_death);
-			release_fork(simul, index);
-			release_fork(simul, second_fork_index);
-			return (EXIT_FAILURE);
-		}
+		start_dying(simul, index, time_before_death);
+		release_fork(simul, index);
+		release_fork(simul, second_fork_index);
+		return (EXIT_FAILURE);
 	}
 	else
 		usleep(simul->settings->time_to_eat * 1000);
