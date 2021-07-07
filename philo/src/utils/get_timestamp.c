@@ -6,11 +6,17 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 17:52:08 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 11:18:46 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/07 17:13:17 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+/*
+** Gets a string with the time that passed since the beginning of the program
+** @param:	- [struct timeval *] timestamp done when the program started
+** @return:	[char *] timestamp in ms as a string (to be freed by caller)
+*/
 
 char	*get_timestamp(struct timeval *program_start)
 {

@@ -6,11 +6,18 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 17:51:17 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/04 11:03:40 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/07 17:11:02 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+/*
+** Get time difference between two timeval struct in milliseconds
+** @param:	- [struct timeval *] present. So a in (a - b)
+**			- [struct timeval *] past. So b in (a - b)
+** @return:	[long] time difference in ms
+*/
 
 long	get_time_diff(struct timeval *present, struct timeval *past)
 {
