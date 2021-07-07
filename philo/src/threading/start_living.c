@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/07 21:07:54 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/08 00:02:46 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,21 @@ int	start_taking_forks(t_simul *simul, t_philo *philo)
 		second_fork = index;
 	}
 	if (take_two_forks(simul, index, first_fork, second_fork))
-			return (EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
 /*
-** Already has the forks at this point and the philo knows he has time enough
-** so he just eats
+** Already has the forks at this point. Only needs to make sure he has
+** time_to_die > time_to_eat, otherwise we kill him
 ** @param:	- [t_simul *] base struct of the program
 **			- [t_philo *] represents the info specific to this thread's philo
 ** @return:	[int] exit status (SUCCESS or FAILURE)
 ** Line-by-line comments:
-** @6-7		Save when this meal starts to compute the time before death later
+** @5-6		Save when this meal starts to compute the time before death later
+**			because time_to_die is from the moment he starts eating
+** @9		If time_to_eat > time_to_die then he doesn't have even time to
+**			finish eating that he's already dead
 */
 
 int	start_eating(t_simul *simul, t_philo *philo)
@@ -112,9 +115,9 @@ int	start_eating(t_simul *simul, t_philo *philo)
 		return (EXIT_FAILURE);
 	if (print_status(simul, philo->index + 1, "is eating") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	time_before_death = get_time_before_death(simul, &philo->last_meal);
-	if (simul->settings->time_to_eat > time_before_death)
+	if (simul->settings->time_to_eat > simul->settings->time_to_die)
 	{
+		time_before_death = get_time_before_death(simul, &philo->last_meal);
 		start_dying(simul, philo->index, time_before_death);
 		release_two_forks(simul, philo->index, second_fork);
 		return (EXIT_FAILURE);

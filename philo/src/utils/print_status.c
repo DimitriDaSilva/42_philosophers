@@ -6,11 +6,19 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 09:38:27 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 16:42:41 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/08 00:01:25 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+/*
+** Takes arguments to convert into a single string formated status
+** @param:	- [t_simul *] base struct of the program
+**			- [int] philo index. 1 based index
+**			- [char *] life status to write after index
+** @return:	[char *] status (to be freed by caller)
+*/
 
 static char	*get_status(t_simul *simul, int nb_index, char *life_status)
 {
@@ -38,7 +46,21 @@ static char	*get_status(t_simul *simul, int nb_index, char *life_status)
 	return (status);
 }
 
-int	print_status(t_simul *simul, int nb_index, char *life_status)
+/*
+** Prints status if simulation still hasn't finished
+** @param:	- [t_simul *] base struct of the program
+**			- [int] philo index. 1 based index
+**			- [char *] life status to write after index
+** @return:	[int] exit status (SUCCESS or FAILURE)
+** Line-by-line comments:
+** @5		Simulation is over if a philo has died or if they have already
+**			ate enough (optional argument). The errors that will break the
+**			main loop will come from here
+** @7-8		We need to make sure to unlock the mutexes so that we don't
+**			destroy locked mutexes
+*/
+
+int	print_status(t_simul *simul, int philo_index, char *life_status)
 {
 	char	*status;
 
@@ -50,7 +72,7 @@ int	print_status(t_simul *simul, int nb_index, char *life_status)
 		pthread_mutex_unlock(&simul->meals_left_lock);
 		return (EXIT_FAILURE);
 	}
-	status = get_status(simul, nb_index, life_status);
+	status = get_status(simul, philo_index, life_status);
 	if (!status)
 		return (EXIT_FAILURE);
 	ft_putstr(status);

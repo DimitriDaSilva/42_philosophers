@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:40:45 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/06 16:56:13 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/08 00:03:43 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Readies the main struct of the program
 ** @param:	- [int] arg count
 **			- [char **] argv values
-** @return:	[int] exit status
+** @return:	[t_simul *] main struct of the program
 ** Line-by-line comments:
 ** @6-7		We need to keep track of when in time the program has started for
 **			the timestamps (time in ms since beginning of the program)
@@ -36,7 +36,7 @@ t_simul	*setup_simul(int argc, char *argv[])
 	if (!simul->settings)
 		return (NULL);
 	simul->philos = get_philos(simul->settings, &simul->prog_start);
-if (!simul->settings)
+	if (!simul->settings)
 		return (NULL);
 	simul->threads = ft_calloc(simul->settings->nb_philo, sizeof(pthread_t));
 	if (!simul->threads)
@@ -76,6 +76,7 @@ t_settings	*get_settings(int argc, char *argv[])
 /*
 ** Get array of t_philo. One item per philo and we preset its values
 ** @param:	- [t_settings *] command line args
+**			- [struct timeval *] timestamp taken when the program started
 ** @return:	[t_philo *] array of t_philo
 */
 
