@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:52:23 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/20 11:09:26 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/20 11:25:14 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 **			- [struct timeval *] timestamp of the moment before the philo
 **								 started to eat (the usleep() call)
 ** @return:	[long] time before death in ms
+** Line-by-line comments:
+** @8-9		In some cases (mostly when time_to_die is close to time_to_eat),
+**			time_before_death will be negative and it breaks the logic. So
+**			we set it to 0 so that it dies asap
 */
 
 long	get_time_before_death(t_simul *simul, struct timeval *last_meal)

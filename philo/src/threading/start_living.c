@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/20 11:09:56 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/07/20 11:25:14 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ int	start_eating(t_simul *simul, t_philo *philo)
 **			- [t_philo *] represents the info specific to this thread's philo
 ** @return:	[int] exit status (SUCCESS or FAILURE)
 ** Line-by-line comments:
-** @line-line	comment
 ** @9-10	Only really sleeps if he knows he has enough time to sleep. If he
 **			doesn't he only sleeps for 'time_before_death' time
 */
