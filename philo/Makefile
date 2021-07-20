@@ -6,7 +6,7 @@
 #    By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/11 09:33:15 by dda-silv          #+#    #+#              #
-#    Updated: 2021/07/06 16:32:31 by dda-silv         ###   ########.fr        #
+#    Updated: 2021/07/20 11:10:58 by dda-silv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,14 +77,14 @@ re:							fclean all
 
 # Debugging functions
 
-#debug:						FLAGS_COMP += $(FLAG_MEM_LEAK)
+# debug:						FLAGS_COMP += $(FLAG_MEM_LEAK)
 debug:						FLAGS_COMP += $(FLAG_RACE_CONDITION)
 debug:						re
 
 # Format functions
 
 normH:
-							norminette $(shell find $(PATH_SRC) -name *.h)
+							@ norminette $(shell find $(PATH_SRC) -name *.h)
 
 normC:
 							@ norminette $(SRCS)
