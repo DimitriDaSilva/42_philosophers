@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 20:30:22 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/20 11:22:59 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/08/06 17:42:26 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,20 @@
 int	will_get_forks_on_time(t_simul *simul, t_philo *philo)
 {
 	int	check;
+	int	nb_philo;
 	int	time_to_eat;
 	int	time_to_die;
 
 	if (simul->settings->nb_philo == 1)
 		return (0);
+	nb_philo = simul->settings->nb_philo;
 	time_to_eat = simul->settings->time_to_eat;
 	time_to_die = simul->settings->time_to_die;
 	if (philo->has_had_first_meal == 1 && time_to_eat * 2 > time_to_die)
+		check = 0;
+	else if (philo->has_had_first_meal == 1
+		&& nb_philo == 3
+		&& time_to_eat * 3 > time_to_die)
 		check = 0;
 	else
 		check = 1;

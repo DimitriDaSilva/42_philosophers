@@ -6,7 +6,7 @@
 /*   By: dda-silv <dda-silv@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:26:04 by dda-silv          #+#    #+#             */
-/*   Updated: 2021/07/20 11:25:14 by dda-silv         ###   ########.fr       */
+/*   Updated: 2021/08/07 09:07:29 by dda-silv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,10 @@ int	start_eating(t_simul *simul, t_philo *philo)
 		return (EXIT_FAILURE);
 	if (print_status(simul, philo->index + 1, "is eating") != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
+	pthread_mutex_lock(&simul->meals_left_lock);
+	philo->meals_left--;
+	philo->has_had_first_meal = 1;
+	pthread_mutex_unlock(&simul->meals_left_lock);
 	if (simul->settings->time_to_eat > simul->settings->time_to_die)
 	{
 		time_before_death = get_time_before_death(simul, &philo->last_meal);
@@ -124,10 +128,6 @@ int	start_eating(t_simul *simul, t_philo *philo)
 	}
 	else
 		usleep(simul->settings->time_to_eat * 1000);
-	pthread_mutex_lock(&simul->meals_left_lock);
-	philo->meals_left--;
-	pthread_mutex_unlock(&simul->meals_left_lock);
-	philo->has_had_first_meal = 1;
 	if (release_two_forks(simul, philo->index, second_fork) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
